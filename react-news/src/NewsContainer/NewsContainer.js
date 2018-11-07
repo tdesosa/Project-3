@@ -8,15 +8,14 @@ class NewsContainer extends Component {
         }
     }
     getNews = async () => {
-        const userOption = this.props.source;
-        console.log(userOption);
-        const news = await fetch('https://newsapi.org/v2/top-headlines?sources=' + userOption + '&apiKey=602804e2347045afb6d91e9898eb9e5c', {
+        console.log(this.props.source.value);
+        const news = await fetch('https://newsapi.org/v2/top-headlines?sources=' + this.props.source.value + '&apiKey=602804e2347045afb6d91e9898eb9e5c', {
         });
         const newsParsedJSON = await news.json();
         return newsParsedJSON;
     }
     componentDidMount(){
-        this.getNews().then((news) => {
+          this.getNews().then((news) => { 
           this.setState({news: news.articles})
           console.log(news);
         }).catch((err) => {
@@ -35,7 +34,7 @@ class NewsContainer extends Component {
         });
         return(
             <div>
-                <h4>Current Headlines (Your Source):</h4>
+                <h4>Current Headlines:</h4>
                 <p>{zeNews}</p>
             </div>
         )
