@@ -38,6 +38,9 @@ class NewsDropdown extends Component {
                 <option value="bloomberg">Bloomberg</option>
                 <option value="the-wall-street-journal">Wall Street Journal</option>
                 <option value="the-economist">The Economist</option>
+                <option value="reddit-r-all">Reddit</option>
+                <option value="mashable">Mashable</option>
+                <option value="espn">ESPN</option>
             </select>
             <input type='submit' onClick={this.handleSubmit}></input>
             {this.state.news.length > 0 ? <NewsConnection news={this.state.news}/> : <div></div>}
