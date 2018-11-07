@@ -7,44 +7,48 @@ class Login extends Component {
 
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      isLoggedIn: ''
     }
+  }
+  checkForm() {
+    return this.state.username.length > 0 && this.state.password.length > 0;
   }
   handleChange = (e) => {
     this.setState({
       [e.currentTarget.name]: e.currentTarget.value
     })
   }
-  handleSubmit = async (e) => {
+  handleSubmit = (e) => {
     e.preventDefault();
 
-    const loginResponse = await fetch('http://localhost:9000/auth', {
-      method: 'POST',
-      credentials: 'include', // this sends our session cookie with our request
-      body: JSON.stringify(this.state),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
+    // const loginResponse = await fetch('http://localhost:9000/auth', {
+    //   method: 'POST',
+    //   credentials: 'include', // this sends our session cookie with our request
+    //   body: JSON.stringify(this.state),
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   }
+    // });
 
-    const parsedResponse = await loginResponse.json();
+    // const parsedResponse = await loginResponse.json();
 
-    if(parsedResponse.data === 'login successful'){
-      // change our component
-      console.log('succes login')
-      // this automatically get passed to your component as a prop
-      this.props.history.push('/teams');
-    }
+    // if(parsedResponse.data === 'login successful'){
+    //   // change our component
+    //   console.log('succes login')
+    //   // this automatically get passed to your component as a prop
+    //   this.props.history.push('/teams');
+    // }
   }
   render(){
     return (
 
       <Form onSubmit={this.handleSubmit}>
         <Label> Username</Label>
-        <Form.Input type='text' name="username" onChange={this.handleChange} />
+        <Form.Input type='text' value={this.state.value} name="username" onChange={this.handleChange} />
         <Label> Password</Label>
-        <Form.Input type='password' name="password" onChange={this.handleChange} />
-        <Button type="Submit" color="green">Login</Button>
+        <Form.Input type='password' value={this.state.value} name="password" onChange={this.handleChange} />
+        <Button type="Submit" value="Submit" color="green">Login</Button>
       </Form>
       )
   }

@@ -30,7 +30,7 @@ router.post('/', async (req, res) => {
   try {
     console.log(req.body, ' this is req.body');
     const createdUser = await User.create(req.body);
-    console.log('response happening?')
+    console.log('response happening')
     res.json({
       status: 200,
       data: createdUser

@@ -26,3 +26,5 @@ router.post('/', async (req, res) => {
     res.send(err);
   }
 });
+
+module.exports = router;

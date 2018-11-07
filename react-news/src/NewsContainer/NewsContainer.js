@@ -4,13 +4,13 @@ class NewsContainer extends Component {
     constructor(){
         super();
         this.state = {
-            news: []
+            news: [],
         }
     }
     getNews = async () => {
         const userOption = this.props.source;
         console.log(userOption);
-        const news = await fetch('https://newsapi.org/v2/top-headlines?sources=' + userOption + '&apiKey=602804e2347045afb6d91e9898eb9e5c', {
+        const news = await fetch('https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=602804e2347045afb6d91e9898eb9e5c', {
         });
         const newsParsedJSON = await news.json();
         return newsParsedJSON;
