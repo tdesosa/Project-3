@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import NewsConnection from './NewsConnection/NewsConnection';
 
-class NewsContainer extends Component {
+class NewsDropdown extends Component {
     constructor(){
         super();
         this.state = {
@@ -15,32 +16,34 @@ class NewsContainer extends Component {
         const newsParsedJSON = await news.json();
         return newsParsedJSON;
     }
-    componentDidMount(){
-        this.getNews().then((news) => {
-          this.setState({news: news.articles})
-          console.log(news);
-        }).catch((err) => {
-          console.log(err);
+    handleChange =  (e) => {
+        this.setState({source: e.currentTarget.value});
+        console.log(e.currentTarget.value); 
+    }
+    handleSubmit = (e) => {
+        e.preventDefault();
+        this.getNews().then((news)=>{
+            this.setState({
+                news: news.articles
+            })
         })
     }
-    render(){
-        const zeNews = this.state.news.map((news, i) => {
-            return (
-                <li key={i}>
-                    Title: {news.title} <br/>
-                    Description: {news.description} <br/>
-                    URL: {news.url} <br/>
-                </li>
-            )
-        });
-        return(
-            <div>
-                <h4>Current Headlines (Your Source):</h4>
-                <p>{zeNews}</p>
-            </div>
-        )
-    }
+    render() {
+        return (
+          <div className="App">
+            <h2>Pick Your News Source!</h2>
+            <select onChange={this.handleChange}>
+                <option value="null">Pick Your News</option>
+                <option value="associated-press">Associated Press</option>
+                <option value="bloomberg">Bloomberg</option>
+                <option value="the-wall-street-journal">Wall Street Journal</option>
+                <option value="the-economist">The Economist</option>
+            </select>
+            <input type='submit' onClick={this.handleSubmit}></input>
+            {this.state.news.length > 0 ? <NewsConnection news={this.state.news}/> : <div></div>}
+          </div>
+        );
+      }
 }
 
-export default NewsContainer;
-
+export default NewsDropdown;

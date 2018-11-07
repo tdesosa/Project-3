@@ -7,8 +7,13 @@
     "nba": "^4.5.0",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
+<<<<<<< HEAD
     "react-router-dom": "^4.3.1",
+=======
+    "react-linkify": "^0.2.2",
+>>>>>>> cf56efc4c8aabb7488ed365f491d8879dba2c430
     "react-scripts": "2.1.1",
+    "react-select": "^2.1.1",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.83.0"
   },
