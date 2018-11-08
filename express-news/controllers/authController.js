@@ -1,37 +1,38 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
+const bcrypt = require('bcryptjs');
 
-router.post('/', async (req, res) => {
-  console.log(req.body, ' this is session')
+// router.post('/', async (req, res) => {
+//   console.log(req.body, ' this is session')
 
-  try {
+//   try {
 
-    const user = await User.create(req.body);
+//     const user = await User.create(req.body);
 
-    req.session.logged = true;
-    req.session.username = req.body.username;
-
-
-    res.json({
-      status: 200,
-      data: 'login successful'
-    });
+//     req.session.logged = true;
+//     req.session.username = req.body.username;
 
 
+//     res.json({
+//       status: 200,
+//       data: 'login successful'
+//     });
 
-  } catch(err){
-    console.log(err);
-    res.send(err);
-  }
-});
 
-module.exports = router;
+
+//   } catch(err){
+//     console.log(err);
+//     res.send(err);
+//   }
+// });
+
+
 
 // ROUTE LEADING FROM HOME PAGE TO REGISTER PAGE
-router.get("/register", (req, res) => {
-  res.render("register.ejs")
-})
+// router.get("/register", (req, res) => {
+//   res.render("register.ejs")
+// })
 
 // REGISTER ROUTE
 router.post('/register', (req, res, next) => {
@@ -41,16 +42,19 @@ router.post('/register', (req, res, next) => {
   userDbEntry.username = req.body.username;
   userDbEntry.password = passwordHash;
   User.create(userDbEntry, (err, user) => {
-
       req.session.userId = user._id;
       req.session.logged   = true;
-      res.redirect('/')
-});
+      res.json({
+        status: 200,
+        data: 'register successful'
+      });
+  });
 });
 
 
 // LOGIN ROUTE
 router.post('/login', async (req, res, next) => {
+  console.log(req.body)
   try{
       await User.findOne({username: req.body.username}, (err, user) => {
       if(user){
@@ -61,14 +65,23 @@ router.post('/login', async (req, res, next) => {
 
               req.session.user = user;
 
-              res.redirect('/')
+              res.json({
+                status: 200,
+                data: 'login successful'
+              });
           } else {
               req.session.message = 'Username or password are incorrect';
-              res.redirect('/')
+              res.json({
+                status: 500,
+                data: 'login unsuccessful'
+              });
           }
       } else {
           req.session.message = 'Username or password are incorrect';
-          res.redirect('/')
+          res.json({
+            status: 500,
+            data: 'login unsuccessful'
+          });
       }
   });
   } catch(err){
@@ -84,8 +97,13 @@ router.get('/logout', (req, res, next) => {
       if(err) {
         return next(err);
       } else {
-        return res.redirect('/');
+        return res.json({
+          status: 200,
+          data: 'logout succesful'
+        });
       }
     });
   }
 });
+
+module.exports = router;

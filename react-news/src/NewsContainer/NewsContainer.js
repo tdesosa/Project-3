@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+// import App from '../App'
 import NewsConnection from './NewsConnection/NewsConnection';
 import EditUser from '../EditUser/EditUser'
 // import AddNews from './AddNews/AddNews'
@@ -41,6 +42,7 @@ class NewsContainer extends Component {
         ))
     }
     editUser = (e) => {
+      console.log(this.props.username);
         this.setState({
           userToEdit: {
             ...this.state.userToEdit,
@@ -112,6 +114,8 @@ class NewsContainer extends Component {
             <br></br>
             <button onClick={this.openAndEdit} editUser={this.editUser} >Edit Your Profile</button>
             <EditUser open={this.state.showEditModal} userToEdit={this.state.userToEdit} editUser={this.editUser} closeAndEdit={this.closeAndEdit}/>
+            <br></br>
+            <button onClick={this.props.handleLogout} editUser={this.editUser} >Logout</button>
           </div>
         );
       }

@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
     "ejs": "^2.6.1",
@@ -16,6 +17,7 @@
     "express-session": "^1.15.6",
     "express-sessions": "^1.0.6",
     "method-override": "^3.0.0",
-    "mongoose": "^5.3.9"
+    "mongoose": "^5.3.9",
+    "semantic-ui-react": "^0.83.0"
   }
 }
