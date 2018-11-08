@@ -25,7 +25,6 @@ class NewsContainer extends Component {
     }
     handleAPIChange = async (e) => {
         await this.setState({source: e.currentTarget.value});
-        console.log(e.currentTarget.value); 
     }
     handleAPISubmit = (e) => {
         e.preventDefault();
@@ -41,7 +40,6 @@ class NewsContainer extends Component {
         ))
     }
     editUser = (e) => {
-
         this.setState({
           userToEdit: {
             ...this.state.userToEdit,
@@ -66,16 +64,11 @@ class NewsContainer extends Component {
     
           const editResponseParsed = await editResponse.json();
     
-    
         } catch(err){
           console.log(err)
         }
-    
     }
     openAndEdit = (userFromTheList) => {
-        console.log(userFromTheList, ' userToEdit  ');
-    
-    
         this.setState({
           showEditModal: true,
           userToEdit: {
