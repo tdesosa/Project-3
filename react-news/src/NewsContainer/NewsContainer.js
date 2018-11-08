@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
 import NewsConnection from './NewsConnection/NewsConnection';
+import EditUser from '../EditUser/EditUser'
+// import AddNews from './AddNews/AddNews'
 
-class NewsDropdown extends Component {
+class NewsContainer extends Component {
     constructor(){
         super();
-        this.state = {
+        this.state = {  
           source: null,
-          news: []
+          news: [],
+          userToEdit: {
+            username: '',
+            password: '',
+            _id: ''
+          },
         }
     }
     getNews = async () => {
@@ -16,11 +23,11 @@ class NewsDropdown extends Component {
         const newsParsedJSON = await news.json();
         return newsParsedJSON;
     }
-    handleChange =  (e) => {
-        this.setState({source: e.currentTarget.value});
+    handleAPIChange = async (e) => {
+        await this.setState({source: e.currentTarget.value});
         console.log(e.currentTarget.value); 
     }
-    handleSubmit = (e) => {
+    handleAPISubmit = (e) => {
         e.preventDefault();
         this.getNews().then((news)=>{
             this.setState({
@@ -28,11 +35,59 @@ class NewsDropdown extends Component {
             })
         })
     }
+    deleteNews = (articleIndex, event) => {
+        this.setState((priorState) => (
+          {news: priorState.news.filter((news, index) => index !== articleIndex)}
+        ))
+    }
+    editUser = (e) => {
+
+        this.setState({
+          userToEdit: {
+            ...this.state.userToEdit,
+            [e.currentTarget.name]: e.currentTarget.value
+          }
+        });
+    }
+    closeAndEdit = async (e) => {
+        e.preventDefault();
+        try {
+    
+          const editResponse = await fetch('http://localhost:9000/api/v1/users/' + this.state.userToEdit._id, {
+            method: 'PUT',
+            body: JSON.stringify({
+              username: this.state.userToEdit.username,
+              password: this.state.userToEdit.password
+            }),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
+    
+          const editResponseParsed = await editResponse.json();
+    
+    
+        } catch(err){
+          console.log(err)
+        }
+    
+    }
+    openAndEdit = (userFromTheList) => {
+        console.log(userFromTheList, ' userToEdit  ');
+    
+    
+        this.setState({
+          showEditModal: true,
+          userToEdit: {
+            ...userFromTheList
+          }
+        })
+    }
     render() {
         return (
           <div className="App">
-            <h2>Pick Your News Source!</h2>
-            <select onChange={this.handleChange}>
+            <h2>See Your News!</h2>
+            <select onChange={this.handleAPIChange}>
                 <option value="null">Pick Your News</option>
                 <option value="associated-press">Associated Press</option>
                 <option value="bloomberg">Bloomberg</option>
@@ -42,11 +97,14 @@ class NewsDropdown extends Component {
                 <option value="mashable">Mashable</option>
                 <option value="espn">ESPN</option>
             </select>
-            <input type='submit' onClick={this.handleSubmit}></input>
-            {this.state.news.length > 0 ? <NewsConnection news={this.state.news}/> : <div></div>}
+            <input type='submit' onClick={this.handleAPISubmit}></input>
+            {this.state.news.length > 0 ? <NewsConnection news={this.state.news} deleteNews={this.deleteNews}/> : <div></div>}
+            <br></br>
+            <button onClick={this.props.editUser}>Edit Your Profile</button>
+            <EditUser userToEdit={this.props.userToEdit} editUser={this.editUser} closeAndEdit={this.closeAndEdit} openAndEdit={this.openAndEdit} />
           </div>
         );
       }
 }
 
-export default NewsDropdown;
+export default NewsContainer;

@@ -7,7 +7,8 @@ class Login extends Component {
 
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      profilePic: ''
     }
   }
   handleChange = (e) => {
@@ -32,19 +33,18 @@ class Login extends Component {
     if(parsedResponse.data === 'login successful'){
       // change our component
       console.log('succes login')
-      // this automatically get passed to your component as a prop
-      this.props.history.push('/teams');
+      this.props.history.push('/news');
     }
   }
   render(){
     return (
 
       <Form onSubmit={this.handleSubmit}>
-        <Label> Username</Label>
+        <Label> Username:</Label>
         <Form.Input type='text' name="username" onChange={this.handleChange} />
-        <Label> Password</Label>
+        <Label> Password:</Label>
         <Form.Input type='password' name="password" onChange={this.handleChange} />
-        <Button type="Submit" color="green">Login</Button>
+        <Button type="Submit" color="red">Login</Button>
       </Form>
       )
   }
