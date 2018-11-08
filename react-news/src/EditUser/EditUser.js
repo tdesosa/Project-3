@@ -4,6 +4,7 @@ import { Modal, Form, Button, Label, Header } from 'semantic-ui-react';
 
 const EditUser = (props) => {
   console.log(props)
+  console.log(props.userToEdit)
   return (
     <Modal open={props.open}>
       <Header>Edit Profile:</Header>

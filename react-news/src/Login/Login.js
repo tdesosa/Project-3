@@ -20,7 +20,7 @@ class Login extends Component {
 
     const loginResponse = await fetch('http://localhost:9000/auth', {
       method: 'POST',
-      credentials: 'include', // this sends our session cookie with our request
+      credentials: 'include',
       body: JSON.stringify(this.state),
       headers: {
         'Content-Type': 'application/json'
@@ -30,8 +30,7 @@ class Login extends Component {
     const parsedResponse = await loginResponse.json();
 
     if(parsedResponse.data === 'login successful'){
-      // change our component
-      console.log('succes login')
+      console.log('login succesful')
       this.props.history.push('/news');
     }
   }
@@ -43,7 +42,7 @@ class Login extends Component {
         <input type='text' name="username" onChange={this.handleChange}></input>
         <label> Password:</label>
         <input type='password' name="password" onChange={this.handleChange}></input>
-        <button type="Submit" color="red">Login</button>
+        <button type="Submit">Login</button>
       </form>
       )
   }

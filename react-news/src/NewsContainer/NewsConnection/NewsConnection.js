@@ -11,7 +11,7 @@ class NewsContainer extends Component {
                     Title: {news.title} <br/>
                     Description: {news.description} <br/>
                     URL: <Linkify>{news.url}</Linkify> <br/>
-                    <button onClick={this.props.deleteNews.bind(this, i)}>Delete This Article</button>
+                    <button onClick={this.props.deleteNews.bind(this, i)}>Not Reading This Article? Click Here To Remove</button>
                 </li>
             )
         });

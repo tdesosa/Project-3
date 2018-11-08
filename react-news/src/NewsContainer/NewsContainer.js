@@ -14,6 +14,7 @@ class NewsContainer extends Component {
             password: '',
             _id: ''
           },
+          showEditModal: false
         }
     }
     getNews = async () => {
@@ -61,8 +62,24 @@ class NewsContainer extends Component {
               'Content-Type': 'application/json'
             }
           });
-    
+
           const editResponseParsed = await editResponse.json();
+
+          const newUserWithEdit = (user) => {
+    
+            if(user._id === editResponseParsed.data._id){
+              user = editResponseParsed.data
+            }
+    
+            return user
+          };
+
+          this.setState({
+            showEditModal: false,
+            users: newUserWithEdit
+          });
+    
+          console.log('click');
     
         } catch(err){
           console.log(err)
@@ -93,8 +110,8 @@ class NewsContainer extends Component {
             <input type='submit' onClick={this.handleAPISubmit}></input>
             {this.state.news.length > 0 ? <NewsConnection news={this.state.news} deleteNews={this.deleteNews}/> : <div></div>}
             <br></br>
-            <button onClick={this.props.editUser}>Edit Your Profile</button>
-            <EditUser userToEdit={this.props.userToEdit} editUser={this.editUser} closeAndEdit={this.closeAndEdit} openAndEdit={this.openAndEdit} />
+            <button onClick={this.openAndEdit} editUser={this.editUser} >Edit Your Profile</button>
+            <EditUser open={this.state.showEditModal} userToEdit={this.state.userToEdit} editUser={this.editUser} closeAndEdit={this.closeAndEdit}/>
           </div>
         );
       }
