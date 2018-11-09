@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 // import App from '../App'
 import NewsConnection from './NewsConnection/NewsConnection';
 import EditUser from '../EditUser/EditUser'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button } from 'reactstrap';
+// import { Button } from 'semantic-ui-react'
+// import Select from 'react-select'
 // import AddNews from './AddNews/AddNews'
 
 class NewsContainer extends Component {
@@ -101,24 +105,33 @@ class NewsContainer extends Component {
           <div className="App">
             <h2>See Your News!</h2>
             <select onChange={this.handleAPIChange}>
-                <option value="null">Pick Your News</option>
-                <option value="associated-press">Associated Press</option>
-                <option value="bloomberg">Bloomberg</option>
-                <option value="the-wall-street-journal">Wall Street Journal</option>
-                <option value="the-economist">The Economist</option>
-                <option value="reddit-r-all">Reddit</option>
-                <option value="mashable">Mashable</option>
-                <option value="espn">ESPN</option>
+              <option value="null">Pick Your News</option>
+              <option value="associated-press">Associated Press</option>
+              <option value="bbc-news">BBC News</option>
+              <option value="bleacher-report">Bleacher report</option>
+              <option value="bloomberg">Bloomberg</option>
+              <option value="buzzfeed">Buzzfeed</option>
+              <option value="cnn">CNN</option>
+              <option value="espn">ESPN</option>
+              <option value="fox-news">Fox News</option>
+              <option value="hacker-news">Hacker News</option>
+              <option value="mashable">Mashable</option>
+              <option value="national-geographic">National Geographic</option>
+              <option value="techcrunch">Techcrunch</option>
+              <option value="the-economist">The Economist</option>
+              <option value="the-new-york-times">The New York Times</option>
+              <option value="the-wall-street-journal">The Wall Street Journal</option>
+              <option value="wired">Wired</option>
             </select>
             <input type='submit' onClick={this.handleAPISubmit}></input>
             {this.state.news.length > 0 ? <NewsConnection news={this.state.news} deleteNews={this.deleteNews}/> : <div></div>}
             <br></br>
-            <button onClick={this.openAndEdit} editUser={this.editUser} >Edit Your Profile</button>
+            <Button color="success" onClick={this.openAndEdit}>Edit Your Profile</Button>
             <EditUser open={this.state.showEditModal} userToEdit={this.state.userToEdit} editUser={this.editUser} closeAndEdit={this.closeAndEdit}/>
             <br></br>
-            <button onClick={this.props.deleteUser} userToEdit={this.state.userToEdit}>Delete Your Profile</button>
+            <Button  color="success" onClick={this.props.deleteUser} userToEdit={this.state.userToEdit}>Delete Your Profile</Button>
             <br></br>
-            <button onClick={this.props.handleLogout} editUser={this.editUser} >Logout</button>
+            <Button color="success" onClick={this.props.handleLogout} editUser={this.editUser} >Logout</Button>
           </div>
         );
       }

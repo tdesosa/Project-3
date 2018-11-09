@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Linkify from 'react-linkify';
+import { Button } from 'semantic-ui-react'
 
 class NewsContainer extends Component {
     render(){
@@ -8,16 +9,16 @@ class NewsContainer extends Component {
             return (
                 <li key={i}>
                     <br></br>
-                    Title: {news.title} <br/>
-                    Description: {news.description} <br/>
-                    URL: <Linkify>{news.url}</Linkify> <br/>
-                    <button onClick={this.props.deleteNews.bind(this, i)}>Not Reading This Article? Click Here To Remove</button>
+                    <strong>Title:</strong> {news.title} <br/>
+                    <strong>Description:</strong> {news.description} <br/>
+                    <strong>URL</strong> <Linkify properties={{target: '_blank', style: {color: 'blue', fontWeight: 'bold'}}}>{news.url}</Linkify> <br/>
+                    <Button onClick={this.props.deleteNews.bind(this, i)}>Not Reading This Article? Click Here To Remove</Button>
                 </li>
             )
         });
         return(
             <div>
-                <h4>Current Headlines:</h4>
+                <strong>Current Headlines:</strong>
                 <p>{zeNews}</p>
             </div>
         )
