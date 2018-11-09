@@ -48,9 +48,6 @@ class App extends Component {
   }
   handleLoginSubmit = async (e) => {
     e.preventDefault();
-    this.setState({
-      loggedIn: true
-    })
     const loginResponse = await fetch('http://localhost:9000/auth/login', {
       method: 'POST',
       credentials: 'include',
@@ -60,8 +57,13 @@ class App extends Component {
       }
     });
     const parsedLoginResponse = await loginResponse.json();
-    console.log(parsedLoginResponse);
-    if(parsedLoginResponse.data === 'login successful'){
+    console.log(parsedLoginResponse)
+    if(parsedLoginResponse.status === 200){
+      console.log('logged in')
+      this.setState({
+        loggedIn: true,
+        user: parsedLoginResponse.data
+      })
       // change our component
       console.log('successful login')
       console.log(this.state.loggedIn);
@@ -76,6 +78,20 @@ class App extends Component {
     console.log(this.state.loggedIn)
     this.props.history.push("/");
   }
+  deleteUser = async (id) => {
+
+
+    const deleteUserResponse = await fetch('http://localhost:9000/api/v1/users/' + id, {
+      method: 'DELETE'
+    });
+
+    // This is the parsed response from express
+    const deleteUserParsed = await deleteUserResponse.json();
+
+
+    console.log(deleteUserParsed, ' response from express server')
+    this.props.history.push("/");
+  }
   render() {
     return (
       <div className="App">
@@ -84,7 +100,7 @@ class App extends Component {
             return <Login user={this.state.user} loggedIn={this.state.loggedIn} handleRegisterChange={this.handleRegisterChange} handleRegisterSubmit={this.handleRegisterSubmit} handleLoginChange={this.handleLoginChange} handleLoginSubmit={this.handleLoginSubmit} />
           }}/>
           <Route exact path="/news" render={() => {
-            return <NewsContainer handleLogout={this.handleLogout}/>
+            return <NewsContainer user={this.state.user} deleteUser={this.deleteUser} handleLogout={this.handleLogout}/>
           }}/>
         </Switch>
       </div>

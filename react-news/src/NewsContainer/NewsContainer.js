@@ -13,7 +13,7 @@ class NewsContainer extends Component {
           userToEdit: {
             username: '',
             password: '',
-            _id: ''
+            _id: '',
           },
           showEditModal: false
         }
@@ -42,7 +42,7 @@ class NewsContainer extends Component {
         ))
     }
     editUser = (e) => {
-      console.log(this.props.username);
+      console.log(this.state.userToEdit.username);
         this.setState({
           userToEdit: {
             ...this.state.userToEdit,
@@ -52,9 +52,10 @@ class NewsContainer extends Component {
     }
     closeAndEdit = async (e) => {
         e.preventDefault();
+        console.log(this.props);
         try {
     
-          const editResponse = await fetch('http://localhost:9000/api/v1/users/' + this.state.userToEdit._id, {
+          const editResponse = await fetch('http://localhost:9000/api/v1/users/' + this.props.user._id, {
             method: 'PUT',
             body: JSON.stringify({
               username: this.state.userToEdit.username,
@@ -69,7 +70,7 @@ class NewsContainer extends Component {
 
           const newUserWithEdit = (user) => {
     
-            if(user._id === editResponseParsed.data._id){
+            if(this.props.user._id === editResponseParsed.data._id){
               user = editResponseParsed.data
             }
     
@@ -82,7 +83,7 @@ class NewsContainer extends Component {
           });
     
           console.log('click');
-    
+
         } catch(err){
           console.log(err)
         }
@@ -114,6 +115,8 @@ class NewsContainer extends Component {
             <br></br>
             <button onClick={this.openAndEdit} editUser={this.editUser} >Edit Your Profile</button>
             <EditUser open={this.state.showEditModal} userToEdit={this.state.userToEdit} editUser={this.editUser} closeAndEdit={this.closeAndEdit}/>
+            <br></br>
+            <button onClick={this.props.deleteUser} userToEdit={this.state.userToEdit}>Delete Your Profile</button>
             <br></br>
             <button onClick={this.props.handleLogout} editUser={this.editUser} >Logout</button>
           </div>

@@ -3,7 +3,6 @@ import { Modal, Form, Button, Label, Header } from 'semantic-ui-react';
 
 
 const EditUser = (props) => { 
-  console.log(props.username)
   return (
     <Modal open={props.open}>
       <Header>Edit Profile:</Header>
@@ -19,7 +18,7 @@ const EditUser = (props) => {
           <Form.Input type='text' name='password' value={props.userToEdit.password} onChange={props.editUser}/>
 
           <Modal.Actions>
-            <Button color='green' type='submit'>Edit User</Button>
+            <Button color='green' type='submit'>Edit Profile</Button>
           </Modal.Actions>
         </Form>
       </Modal.Content>
