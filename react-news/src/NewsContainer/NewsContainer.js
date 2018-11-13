@@ -100,6 +100,11 @@ class NewsContainer extends Component {
           }
         })
     }
+    cancelModal = () => {
+      this.setState({
+        showEditModal: false,
+      })
+    }
     render() {
         return (
           <div className="App">
@@ -127,7 +132,7 @@ class NewsContainer extends Component {
             {this.state.news.length > 0 ? <NewsConnection news={this.state.news} deleteNews={this.deleteNews}/> : <div></div>}
             <br></br>
             <Button color="success" onClick={this.openAndEdit}>Edit Your Profile</Button>
-            <EditUser open={this.state.showEditModal} userToEdit={this.state.userToEdit} editUser={this.editUser} closeAndEdit={this.closeAndEdit}/>
+            <EditUser isOpen={this.state.showEditModal} userToEdit={this.state.userToEdit} editUser={this.editUser} closeAndEdit={this.closeAndEdit} cancelModal={this.cancelModal}/>
             <br></br>
             <Button  color="success" onClick={this.props.deleteUser} userToEdit={this.state.userToEdit}>Delete Your Profile</Button>
             <br></br>
