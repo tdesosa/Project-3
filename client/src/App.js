@@ -25,7 +25,7 @@ class App extends Component {
   }
   handleRegisterSubmit = async (e) => {
     e.preventDefault();
-    const registerResponse = await fetch('http://localhost:9000/auth/register', {
+    const registerResponse = await fetch(`${process.env.REACT_APP_BACKEND_ADDRESS}/auth/register`, {
       method: 'POST',
       credentials: 'include',
       body: JSON.stringify(this.state),
@@ -48,7 +48,7 @@ class App extends Component {
   }
   handleLoginSubmit = async (e) => {
     e.preventDefault();
-    const loginResponse = await fetch('http://localhost:9000/auth/login', {
+    const loginResponse = await fetch(`${process.env.REACT_APP_BACKEND_ADDRESS}/auth/login`, {
       method: 'POST',
       credentials: 'include',
       body: JSON.stringify(this.state),
@@ -81,7 +81,7 @@ class App extends Component {
   deleteUser = async (id) => {
 
 
-    const deleteUserResponse = await fetch('http://localhost:9000/api/v1/users/' + id, {
+    const deleteUserResponse = await fetch(`${process.env.REACT_APP_BACKEND_ADDRESS}/users/` + id, {
       method: 'DELETE'
     });
 
