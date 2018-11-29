@@ -4,6 +4,7 @@ const bodyParser     = require('body-parser');
 const cors           = require('cors');
 const session        = require('express-session');
 const bcrypt         = require('bcryptjs');
+const path = require('path');
 
 
 require('./db/db');
@@ -16,6 +17,7 @@ app.use(session({
 }));
 
 // Middleware
+app.use(express.static(path.join(__dirname, 'client/build')));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
@@ -34,7 +36,11 @@ const userController = require('./controllers/userController');
 const authController  = require('./controllers/authController');
 
 app.use('/api/v1/users', userController);
-app.use('/auth', authController);
+app.use('/api/v1/auth', authController);
+
+app.get('*', (req,res) =>{
+  res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
 
 app.listen(process.env.PORT || 9000, () => {
   console.log('listening on port 9000');
