@@ -7,13 +7,15 @@ class NewsContainer extends Component {
         console.log(this.props);
         const zeNews = this.props.news.map((news, i) => {
             return (
+               <ul>
                 <li key={i}>
                     <br></br>
                     <strong>Title:</strong> {news.title} <br/>
                     <strong>Description:</strong> {news.description} <br/>
-                    <strong>URL</strong> <Linkify properties={{target: '_blank', style: {color: 'blue', fontWeight: 'bold'}}}>{news.url}</Linkify> <br/>
+                    <strong>URL:</strong> <Linkify properties={{target: '_blank', style: {color: 'blue', fontWeight: 'bold'}}}>{news.url}</Linkify> <br/>
                     <Button onClick={this.props.deleteNews.bind(this, i)}>Not Reading This Article? Click Here To Remove</Button>
                 </li>
+                </ul> 
             )
         });
         return(

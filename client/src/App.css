@@ -2,7 +2,12 @@ body {
   background-image: url(./css/img/newsBackground3.jpg);
   background-repeat: no-repeat;
   background-size: cover;
+  font-family: 'Playfair Display SC', serif;
 }
+
+/* #instructions {
+  font-family: 'Montserrat', sans-serif;
+} */
 
 Button {
   margin: 10px;
@@ -10,20 +15,44 @@ Button {
 
 Label {
   margin: 10px;
+  color:white;
 }
 
 Input {
   margin: 10px;
 }
 
+h1 {
+  margin: 10px;
+  color: white;
+}
+
 h2 {
   margin: 10px;
+  color: white;
+}
+
+p {
+  margin: 10px;
+  color: white;
+}
+
+ul {
+  background-color: greenyellow;
+  opacity: .5;
+}
+
+li {
+  list-style-image: url('./css/img/newsIcon.png');
+  background-color: greenyellow;
+  color: black;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .App {
   text-align: left;
   margin-left: 10px;
-  color: whitesmoke;
+  color: black;
 }
 
 .App-logo {
