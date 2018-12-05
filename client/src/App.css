@@ -1,6 +1,29 @@
+body {
+  background-image: url(./css/img/newsBackground3.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+Button {
+  margin: 10px;
+}
+
+Label {
+  margin: 10px;
+}
+
+Input {
+  margin: 10px;
+}
+
+h2 {
+  margin: 10px;
+}
+
 .App {
   text-align: left;
   margin-left: 10px;
+  color: whitesmoke;
 }
 
 .App-logo {

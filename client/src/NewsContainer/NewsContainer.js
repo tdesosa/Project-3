@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 // import App from '../App'
 import NewsConnection from './NewsConnection/NewsConnection';
+import NewsSearch from './NewsSearch/NewsSearch'
 import EditUser from '../EditUser/EditUser'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'reactstrap';

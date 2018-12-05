@@ -1,11 +1,11 @@
-const express        = require('express');
-const app            = express();
-const bodyParser     = require('body-parser');
-const cors           = require('cors');
-const session        = require('express-session');
-const bcrypt         = require('bcryptjs');
-const path = require('path');
-const dotenv = require('dotenv');
+const express    = require('express');
+const app        = express();
+const bodyParser = require('body-parser');
+const cors       = require('cors');
+const session    = require('express-session');
+const bcrypt     = require('bcryptjs');
+const path       = require('path');
+const dotenv     = require('dotenv');
 
 require('dotenv').config();
 
