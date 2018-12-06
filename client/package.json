@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/react-select": "^2.0.10",
     "@types/reactstrap": "^6.4.2",
     "bootstrap": "^4.1.3",
     "cors": "^2.8.5",

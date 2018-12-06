@@ -5,9 +5,15 @@ body {
   font-family: 'Playfair Display SC', serif;
 }
 
-/* #instructions {
-  font-family: 'Montserrat', sans-serif;
-} */
+#instructions {
+  margin-top: 30px;
+  margin-bottom: 30px
+}
+
+nav {
+  margin: 10px;
+  border-style: groove;
+}
 
 Button {
   margin: 10px;
@@ -15,11 +21,30 @@ Button {
 
 Label {
   margin: 10px;
-  color:white;
+  color:black;
+}
+
+.login-labels {
+    margin: 10px;
+    color:white;
+}
+
+#newsSelctor {
+  font-family: 'Playfair Display SC', serif;
 }
 
 Input {
   margin: 10px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+input {
+  margin: 10px;
+}
+
+select {
+  margin: 10px;
+  font-family: 'Playfair Display SC', serif;
 }
 
 h1 {
@@ -40,6 +65,7 @@ p {
 ul {
   background-color: greenyellow;
   opacity: .5;
+  border-style: outset;
 }
 
 li {
@@ -49,9 +75,26 @@ li {
   font-family: 'Montserrat', sans-serif;
 }
 
+.modal-header {
+  background-color: black;
+  color: white;
+  border-style: outset;
+}
+
+.modal-footer {
+  background-color: black;
+  color: white;
+  border-style: outset;
+}
+
+.modal-body {
+  /* font-family: 'Montserrat', sans-serif; */
+  background-color: rgb(208, 208, 208);
+  border-style: none outset;
+}
+
 .App {
   text-align: left;
-  margin-left: 10px;
   color: black;
 }
 

@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 // import App from '../App'
 import NewsConnection from './NewsConnection/NewsConnection';
-import NewsSearch from './NewsSearch/NewsSearch'
+// import NewsSearch from './NewsSearch/NewsSearch'
 import EditUser from '../EditUser/EditUser'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button } from 'reactstrap';
-// import { Button } from 'semantic-ui-react'
+import { Button, Navbar, NavbarBrand, NavItem, NavLink} from 'reactstrap';
 // import Select from 'react-select'
 // import AddNews from './AddNews/AddNews'
 
@@ -20,7 +19,7 @@ class NewsContainer extends Component {
             password: '',
             _id: '',
           },
-          showEditModal: false
+          showEditModal: false,
         }
     }
     getNews = async () => {
@@ -109,7 +108,10 @@ class NewsContainer extends Component {
     render() {
         return (
           <div className="App">
-            <h2>See Your News!</h2>
+            <Navbar color="secondary" light>
+              <NavbarBrand><h2>YourNewsApp</h2></NavbarBrand>
+              <Button color="secondary" onClick={this.props.handleLogout}>Logout</Button>
+            </Navbar>
             <select onChange={this.handleAPIChange}>
               <option value="null">Pick Your News</option>
               <option value="associated-press">Associated Press</option>
@@ -129,15 +131,12 @@ class NewsContainer extends Component {
               <option value="the-wall-street-journal">The Wall Street Journal</option>
               <option value="wired">Wired</option>
             </select>
-            <input type='submit' onClick={this.handleAPISubmit}></input>
+            <input id='newsSelctor' type='submit' onClick={this.handleAPISubmit}></input>
             {this.state.news.length > 0 ? <NewsConnection news={this.state.news} deleteNews={this.deleteNews}/> : <div></div>}
-            <br></br>
-            <Button color="success" onClick={this.openAndEdit}>Edit Your Profile</Button>
+            <Button color="secondary" onClick={this.openAndEdit}>Edit Your Profile</Button>
             <EditUser isOpen={this.state.showEditModal} userToEdit={this.state.userToEdit} editUser={this.editUser} closeAndEdit={this.closeAndEdit} cancelModal={this.cancelModal}/>
             <br></br>
-            <Button  color="success" onClick={this.props.deleteUser} userToEdit={this.state.userToEdit}>Delete Your Profile</Button>
-            <br></br>
-            <Button color="success" onClick={this.props.handleLogout} editUser={this.editUser} >Logout</Button>
+            <Button color="secondary" onClick={this.props.deleteUser} userToEdit={this.state.userToEdit}>Delete Your Profile</Button>
           </div>
         );
       }
